@@ -5,12 +5,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Item
 from .models import Comment
-from django.core.exceptions import ValidationError
-from django.conf import settings
-from django.utils.translation import ugettext as _
-import urllib
-import urllib3
-import json
+# from django.core.exceptions import ValidationError
+# from django.conf import settings
+# from django.utils.translation import ugettext as _
+# import urllib
+# import urllib3
+# import json
 
 class MyRegistrationForm(UserCreationForm):
     email= forms.EmailField(required=True)
