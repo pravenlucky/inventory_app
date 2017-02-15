@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    {{ block.super }}
+    <ul>
+        {% if user.is_authenticated %}
+            <p>{{ user }} is logged in </p>
+            <li><a href='/inventory/edit_profile'> edit profile</a></li>
+            <li><a href='/inventory/logout'> Logout</a></li>
+        {% else %}
+            <p> Nobody is logged in </p>
+            <li><a href='/inventory/login'> Login</a></li>
+        {% endif %}
+
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h2> Edit Profile</h2>
+    {% if user.is_authenticated %}
+
+        <form action="/inventory/edit_profile/" method="post">{% csrf_token %}
+            <ul>
+                {{form.as_ul}}
+            </ul>
+            <hr>
+            <input type="submit" name="submit" value="Change">
+        </form>
+
+    {% else %}
+        <h4> You are not logged in</h4>
+
+    {% endif %}
+
+{% endblock %}

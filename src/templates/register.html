@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    {{ block.super }}
+    <ul>
+        {% if user.is_authenticated %}
+            <p>{{ user }} is logged in </p>
+            <li><a href='/inventory/edit_profile'> edit profile</a></li>
+            <li><a href='/inventory/logout'> Logout</a></li>
+        {% else %}
+            <p> Nobody is logged in </p>
+            <li><a href='/inventory/login'> Login</a></li>
+        {% endif %}
+
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h2> REGISTER</h2>
+
+    <form action='/inventory/register/' method='post'> {% csrf_token %}
+        <ul>{{ form.as_ul }}</ul>
+
+{#        {% if form.errors %}#}
+{#            {% for field in form %}#}
+{#                {% for error in field.errors %}#}
+{#                    <div class="alert alert-danger">#}
+{#                        <strong>{{ error|escape }}</strong>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#            {% for error in form.non_field_errors %}#}
+{#                <div class="alert alert-danger">#}
+{#                    <strong>{{ error|escape }}</strong>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
+
+{#        <center><div style="margin:0 auto; margin-top: 175px; margin-bottom: 125px" class="g-recaptcha" data-sitekey="6LebFRUUAAAAAL0aXYI1oam8mZZfMLNuAR9staS6"></div></center>#}
+        <center><input type='submit' value='register'/></center>
+    </form>
+
+{% endblock %}

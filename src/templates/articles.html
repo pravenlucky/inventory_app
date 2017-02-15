@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    {{ block.super }}
+    <ul>
+        {% if user.is_authenticated %}
+            <p>{{ user }} is logged in </p>
+            <li><a href='/inventory/edit_profile'> edit profile</a></li>
+            <li><a href='/inventory/logout'> Logout</a></li>
+        {% else %}
+            <p> Nobody is logged in </p>
+            <li><a href='/inventory/login'> Login</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <h1>ARTICLES</h1>
+
+    <h3> The cookie language is : {{ language }}</h3>
+    <h4> The session language is : {{ session_language }}</h4>
+
+    {% for article in articles %}
+        <div>
+            <h3><a href="/inventory/get/{{ article.id }}/"> {{ article.title|upper }}</a></h3>
+
+            <p> {{ article.description|truncatewords:3 }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
